@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  account-movements-service:
+    build: .
+    ports:
+      - "8083:8080"  # Expone el servicio en el puerto 8082 del host
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/prueba-sofka?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
