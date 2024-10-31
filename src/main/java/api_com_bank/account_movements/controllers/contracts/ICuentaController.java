@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.*;
 public interface ICuentaController {
 
     @PostMapping(path = "/create")
-    ResponseEntity<ResponseDTO> createCuenta(CuentaRequestDTO cuentaRequestDTO);
+    ResponseEntity<ResponseDTO> createCuenta(@RequestBody CuentaRequestDTO cuentaRequestDTO);
 
     @PutMapping(path = "/update")
-    ResponseEntity<ResponseDTO> updateCuenta(CuentaRequestDTO cuentaRequestDTO);
+    ResponseEntity<ResponseDTO> updateCuenta(@RequestBody CuentaRequestDTO cuentaRequestDTO);
 
     @DeleteMapping(path = "/delete/{numeroCuenta}")
     ResponseEntity<ResponseDTO> deleteCuenta(@PathVariable String numeroCuenta);

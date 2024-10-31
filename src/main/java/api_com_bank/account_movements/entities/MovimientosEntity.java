@@ -32,8 +32,7 @@ public class MovimientosEntity {
     @Column(name = "SALDO", nullable = false)
     private Double saldo;
 
-    @ManyToOne
-    @JoinColumn(name = "NUMERO_CUENTA", nullable = false)
-    private CuentaEntity cuenta;
+    @Column(name = "NUMERO_CUENTA", nullable = false)
+    private String numeroCuenta;
 
 }

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 public interface IMovimientosController{
 
     @PostMapping(path = "/create")
-    ResponseEntity<ResponseDTO> createCuenta(CreateMovimientosRequestDTO createMovimientosRequestDTO);
+    ResponseEntity<ResponseDTO> createCuenta(@RequestBody CreateMovimientosRequestDTO createMovimientosRequestDTO);
 
     @PutMapping(path = "/update")
-    ResponseEntity<ResponseDTO> updateCuenta(UpdateMovimientosRequestDTO updateMovimientosRequestDTO);
+    ResponseEntity<ResponseDTO> updateCuenta(@RequestBody UpdateMovimientosRequestDTO updateMovimientosRequestDTO);
 
     @DeleteMapping(path = "/delete/{id}")
     ResponseEntity<ResponseDTO> deleteCuenta(@PathVariable Long id);
