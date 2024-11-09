@@ -8,8 +8,8 @@ import api_com_bank.account_movements.entities.MovimientosEntity;
 import api_com_bank.account_movements.mappers.MovimientosMapper;
 import api_com_bank.account_movements.repositories.MovimientosRepository;
 import api_com_bank.account_movements.services.contracts.IMovimientosServices;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,15 +17,10 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MoviemientosServices implements IMovimientosServices {
 
     private final MovimientosRepository movimientosRepository;
-
-    @Autowired
-    public MoviemientosServices(MovimientosRepository movimientosRepository) {
-        this.movimientosRepository = movimientosRepository;
-    }
-
     @Override
     public ResponseDTO createCuenta(CreateMovimientosRequestDTO createMovimientosRequestDTO) {
         ResponseDTO response = new ResponseDTO();

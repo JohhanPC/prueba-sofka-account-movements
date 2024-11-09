@@ -5,20 +5,16 @@ import api_com_bank.account_movements.dtos.request.CuentaRequestDTO;
 import api_com_bank.account_movements.dtos.response.CuentaResponseDTO;
 import api_com_bank.account_movements.dtos.response.ResponseDTO;
 import api_com_bank.account_movements.services.contracts.ICuentaServices;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class CuentaController implements ICuentaController {
 
     private final ICuentaServices cuentaServices;
-
-    @Autowired
-    public CuentaController(ICuentaServices cuentaServices) {
-        this.cuentaServices = cuentaServices;
-    }
 
     @Override
     public ResponseEntity<ResponseDTO> createCuenta(CuentaRequestDTO cuentaRequestDTO) {

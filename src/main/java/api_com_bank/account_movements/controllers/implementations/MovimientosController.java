@@ -6,20 +6,16 @@ import api_com_bank.account_movements.dtos.request.UpdateMovimientosRequestDTO;
 import api_com_bank.account_movements.dtos.response.MoviemientosResponseDTO;
 import api_com_bank.account_movements.dtos.response.ResponseDTO;
 import api_com_bank.account_movements.services.contracts.IMovimientosServices;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class MovimientosController implements IMovimientosController {
 
     private final IMovimientosServices movimientosServices;
-
-    @Autowired
-    public MovimientosController(IMovimientosServices movimientosServices) {
-        this.movimientosServices = movimientosServices;
-    }
 
     @Override
     public ResponseEntity<ResponseDTO> createCuenta(CreateMovimientosRequestDTO createMovimientosRequestDTO) {

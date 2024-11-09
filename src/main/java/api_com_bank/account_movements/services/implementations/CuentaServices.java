@@ -7,8 +7,8 @@ import api_com_bank.account_movements.entities.CuentaEntity;
 import api_com_bank.account_movements.mappers.CuentaMapper;
 import api_com_bank.account_movements.repositories.CuentaRepository;
 import api_com_bank.account_movements.services.contracts.ICuentaServices;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,14 +16,10 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class CuentaServices implements ICuentaServices {
 
     private final CuentaRepository cuentaRepository;
-
-    @Autowired
-    public CuentaServices(CuentaRepository cuentaRepository) {
-        this.cuentaRepository = cuentaRepository;
-    }
 
     @Override
     public ResponseDTO createCuenta(CuentaRequestDTO cuentaRequestDTO) {
