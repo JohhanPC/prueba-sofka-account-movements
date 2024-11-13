@@ -1,7 +1,7 @@
 package api_com_bank.account_movements.controllers;
 
 import api_com_bank.account_movements.dtos.response.ErrorResponseDTO;
-import api_com_bank.account_movements.exceptions.BadRequestException;
+import api_com_bank.account_movements.exceptions.ClientErrorException;
 import api_com_bank.account_movements.exceptions.ServerErrorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,18 +13,8 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    private ErrorResponseDTO buildErrorResponse(Exception ex, HttpStatus status, WebRequest request) {
-        return new ErrorResponseDTO(
-            LocalDateTime.now(),
-            status.value(),
-            status.getReasonPhrase(),
-            ex.getMessage(),
-            request.getDescription(false).replace("uri=", "")
-        );
-    }
-
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorResponseDTO> handleBadRequestException(BadRequestException ex, WebRequest request) {
+    @ExceptionHandler(ClientErrorException.class)
+    public ResponseEntity<ErrorResponseDTO> handleBadRequestException(ClientErrorException ex, WebRequest request) {
         ErrorResponseDTO errorResponse = buildErrorResponse(ex, HttpStatus.BAD_REQUEST, request);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -39,6 +29,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponseDTO> handleAllExceptions(Exception ex, WebRequest request) {
         ErrorResponseDTO errorResponse = buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ErrorResponseDTO buildErrorResponse(Exception ex, HttpStatus status, WebRequest request) {
+        return new ErrorResponseDTO(
+                LocalDateTime.now(),
+                status.value(),
+                status.getReasonPhrase(),
+                ex.getMessage(),
+                request.getDescription(false).replace("uri=", "")
+        );
     }
 
 }

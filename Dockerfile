@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/account-movements-0.0.1-SNAPSHOT.jar account-movements.jar
 
 # Puerto en el contenedor que se usará para acceder al servicio
-EXPOSE 8080
+EXPOSE 8081
 
 # Comando para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "account-movements.jar"]
