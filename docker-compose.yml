@@ -1,10 +1,30 @@
 version: '3.8'
 services:
+  # Servicio de base de datos para el microservicio de account-movements
+  account-movements-db:
+    image: mysql:8.0
+    container_name: account_movements_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: account_movements_db
+      MYSQL_USER: account_user
+      MYSQL_PASSWORD: account_password
+    ports:
+      - "3307:3306"  # Expone el puerto 3307 para el microservicio de account-movements
+    volumes:
+      - account_movements_db_data:/var/lib/mysql
+
+  # Microservicio de account-movements
   account-movements-service:
     build: .
     ports:
-      - "8083:8080"  # Expone el servicio en el puerto 8082 del host
+      - "8083:8084"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/prueba-sofka?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:mysql://account-movements-db:3306/account_movements_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: account_user
+      SPRING_DATASOURCE_PASSWORD: account_password
+    depends_on:
+      - account-movements-db
+
+volumes:
+  account_movements_db_data:
