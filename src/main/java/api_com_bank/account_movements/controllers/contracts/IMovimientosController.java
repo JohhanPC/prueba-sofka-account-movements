@@ -22,4 +22,11 @@ public interface IMovimientosController{
     @GetMapping(path = "/get/{id}")
     ResponseEntity<MoviemientosResponseDTO> getMovimientos(@PathVariable Long id);
 
+    @GetMapping(path = "/reportes")
+    ResponseEntity<ResponseDTO> getAccountReport(
+            @RequestParam String clientId,
+            @RequestParam String startDate,
+            @RequestParam String endDate
+    );
+
 }

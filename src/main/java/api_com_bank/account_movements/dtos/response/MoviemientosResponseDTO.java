@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 public class MoviemientosResponseDTO {
 
+    private Long id;
     private Date fecha;
     private String tipoMovimiento;
     private Double valor;

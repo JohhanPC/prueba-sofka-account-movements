@@ -2,6 +2,7 @@ package api_com_bank.account_movements.controllers;
 
 import api_com_bank.account_movements.dtos.response.ErrorResponseDTO;
 import api_com_bank.account_movements.exceptions.ClientErrorException;
+import api_com_bank.account_movements.exceptions.MessageSendingException;
 import api_com_bank.account_movements.exceptions.ServerErrorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleAllExceptions(Exception ex, WebRequest request) {
+        ErrorResponseDTO errorResponse = buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(MessageSendingException.class)
+    public ResponseEntity<ErrorResponseDTO> handleMessageSendingException(MessageSendingException ex, WebRequest request) {
         ErrorResponseDTO errorResponse = buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, request);
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
